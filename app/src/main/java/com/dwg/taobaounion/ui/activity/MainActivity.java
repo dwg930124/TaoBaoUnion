@@ -1,8 +1,11 @@
-package com.dwg.taobaounion;
+package com.dwg.taobaounion.ui.activity;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.dwg.taobaounion.R;
+import com.dwg.taobaounion.ui.fragment.HomeFragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -12,6 +15,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initView();
+
+    }
+
+    private void initView() {
+        HomeFragment homeFragment = new HomeFragment();
     }
 
 }
