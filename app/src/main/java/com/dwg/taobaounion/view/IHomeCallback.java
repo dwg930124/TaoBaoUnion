@@ -8,4 +8,12 @@ public interface IHomeCallback {
      * 获取商品分类成功
      */
     void onCategoriesLoaded(Categories categories);
+
+    void onLoading();
+
+    void onSuccess();
+
+    void onError();
+
+    void onEmpty();
 }

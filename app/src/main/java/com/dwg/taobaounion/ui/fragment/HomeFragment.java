@@ -1,7 +1,9 @@
 package com.dwg.taobaounion.ui.fragment;
 
 
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
@@ -30,6 +32,11 @@ public class HomeFragment extends BaseFragment implements IHomeCallback {
 
 
     @Override
+    protected View loadRootView(LayoutInflater inflater, ViewGroup container) {
+        return inflater.inflate(R.layout.fragment_base_home_layout, container, false);
+    }
+
+    @Override
     protected int getRootViewResId() {
         return R.layout.fragment_home;
     }
@@ -56,11 +63,40 @@ public class HomeFragment extends BaseFragment implements IHomeCallback {
     }
 
     @Override
+    protected void onRetryClick() {
+        super.onRetryClick();
+        // 网络错误，点击重试，重新加载分类内容
+        if (mHomePresenter != null) {
+            mHomePresenter.getCategories();
+        }
+    }
+
+    @Override
     public void onCategoriesLoaded(Categories categories) {
         // 加载的数据从这里回来
         if (categories != null) {
             mHomePagerAdapter.setCategories(categories);
         }
+    }
+
+    @Override
+    public void onLoading() {
+        setupStatus(Status.LOADING);
+    }
+
+    @Override
+    public void onSuccess() {
+        setupStatus(Status.SUCCESS);
+    }
+
+    @Override
+    public void onError() {
+        setupStatus(Status.ERROR);
+    }
+
+    @Override
+    public void onEmpty() {
+        setupStatus(Status.EMPTY);
     }
 
     @Override
